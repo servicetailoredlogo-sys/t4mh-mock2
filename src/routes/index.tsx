@@ -73,7 +73,9 @@ function Index() {
     <header className="site-header">
       <a href="#home" className="brand" aria-label="T4MH Music home"><img src={logoAsset.url} alt="T4MH Music" /></a>
       <nav className={menuOpen ? "open" : ""} aria-label="Primary navigation">
-        {[["Music","music"],["About","about"],["Philosophy","philosophy"],["Usage","usage"],["Contact","contact"]].map(([label,id]) => (
+        {([[
+          "Music", "music",
+        ], ["About", "about"], ["Philosophy", "philosophy"], ["Usage", "usage"], ["Contact", "contact"]] as const).map(([label,id]) => (
           <button key={id} onClick={() => goTo(id)}>{label}</button>
         ))}
       </nav>
