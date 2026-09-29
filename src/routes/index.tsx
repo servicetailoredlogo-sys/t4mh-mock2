@@ -1,9 +1,9 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, Link } from "@tanstack/react-router";
 import { useEffect, useRef, useState } from "react";
-import { ArrowDown, ArrowUpRight, Check, Menu, Pause, Play, Send, X } from "lucide-react";
+import { ArrowDown, ArrowUpRight, Check, Pause, Play, Send, X } from "lucide-react";
 
-import logoAsset from "../assets/t4mh-logo.png.asset.json";
 import keithPortrait from "../assets/keith-composer.jpg";
+import { PageShell } from "../components/site-chrome";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -50,7 +50,6 @@ function Player({ track, index, active, onToggle }: { track: typeof tracks[numbe
 
 function Index() {
   const [playing, setPlaying] = useState<number | null>(null);
-  const [menuOpen, setMenuOpen] = useState(false);
   const [sent, setSent] = useState(false);
   const mainRef = useRef<HTMLElement>(null);
 
@@ -64,25 +63,7 @@ function Index() {
     return () => observer.disconnect();
   }, []);
 
-  const goTo = (id: string) => {
-    document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
-    setMenuOpen(false);
-  };
-
-  return <main ref={mainRef}>
-    <header className="site-header">
-      <a href="#home" className="brand" aria-label="T4MH Music home"><img src={logoAsset.url} alt="T4MH Music" /></a>
-      <nav className={menuOpen ? "open" : ""} aria-label="Primary navigation">
-        {([[
-          "Music", "music",
-        ], ["About", "about"], ["Philosophy", "philosophy"], ["Usage", "usage"], ["Contact", "contact"]] as const).map(([label,id]) => (
-          <button key={id} onClick={() => goTo(id)}>{label}</button>
-        ))}
-      </nav>
-      <button className="menu-button" onClick={() => setMenuOpen(!menuOpen)} aria-label="Toggle navigation">{menuOpen ? <X /> : <Menu />}</button>
-      <button className="header-listen" onClick={() => goTo("music")}><Play size={12} fill="currentColor" /> Listen</button>
-    </header>
-
+  return <PageShell>
     <section id="home" className="hero">
       <div className="staff staff-one"><i/><i/><i/><i/><i/></div>
       <div className="staff staff-two"><i/><i/><i/><i/><i/></div>
@@ -92,8 +73,8 @@ function Index() {
         <h1>Music<br/><em>Beyond</em> Words</h1>
         <p className="hero-lede">Symphonic, cinematic, instrumental, and vocal works composed for emotion, story, and human connection.</p>
         <div className="hero-actions">
-          <button className="primary-action" onClick={() => goTo("music")}><Play size={15} fill="currentColor" /> Enter the listening room</button>
-          <button className="text-action" onClick={() => goTo("about")}>Discover the story <ArrowDown size={15}/></button>
+          <Link className="primary-action" to="/music"><Play size={15} fill="currentColor" /> Enter the listening room</Link>
+          <Link className="text-action" to="/about">Discover the story <ArrowDown size={15}/></Link>
         </div>
       </div>
       <div className="hero-footer"><span>T4MH / Independent music studio</span><span>Scroll to listen</span></div>
@@ -141,7 +122,7 @@ function Index() {
           <li><Check size={16}/> Credit T4MH Music and respect the artist</li>
           <li className="restricted"><X size={16}/> No monetization, resale, or commercial exploitation</li>
         </ul>
-        <button className="text-action" onClick={() => goTo("contact")}>Ask about usage <ArrowUpRight size={15}/></button>
+        <Link className="text-action" to="/contact">Ask about usage <ArrowUpRight size={15}/></Link>
       </div>
     </section>
 
@@ -156,6 +137,5 @@ function Index() {
       </form>
     </section>
 
-    <footer><img src={logoAsset.url} alt="T4MH Music"/><p>Original music. Human feeling.</p><span>© 2026 T4MH Music</span></footer>
-  </main>;
+  </PageShell>;
 }

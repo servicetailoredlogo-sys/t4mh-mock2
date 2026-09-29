@@ -9,5 +9,5 @@
 > the editor, so keep the branch in a working state.
 <!-- LOVABLE:END -->
 
-- Keep the T4MH Music site as a single-page cinematic listening experience; the brief prioritizes immersion and seamless section navigation.
+- Keep the T4MH Music experience cinematic and continuous while using dedicated content routes for Music, About, Usage, and Contact.
 - Treat audio controls as presentation-only until real track files are supplied; this avoids inventing or misrepresenting Keith's recordings.
