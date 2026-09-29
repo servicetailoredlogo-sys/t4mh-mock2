@@ -1,6 +1,7 @@
 import { Link } from "@tanstack/react-router";
 import { Menu, Play, X } from "lucide-react";
 import { useState } from "react";
+import type { ReactNode } from "react";
 
 import logoAsset from "../assets/t4mh-logo.png.asset.json";
 
@@ -44,6 +45,6 @@ export function InnerHero({ number, eyebrow, title, italic, lede }: { number: st
   </section>;
 }
 
-export function PageShell({ children }: { children: React.ReactNode }) {
+export function PageShell({ children }: { children: ReactNode }) {
   return <main><SiteHeader />{children}<SiteFooter /></main>;
 }
